@@ -38,16 +38,12 @@ class ShootingStar {
   update() {
     this.pos.add(this.vel)
     this.vel.add(this.acl)
-    this.acl.x *= 0.9;
-    this.acl.y *= 0.9;
-    this.acl.z *= 0.9;
+    this.acl.multiplyScalar(0.9)
   }
 }
 class trailShootingStar {
   constructor(_pos, _index) {
     this.pos = _pos;
-  
-
     this.size = (-(0.0004*Math.pow(_index,2))+0.08*_index)/50
     this.color = `rgb(${_index}, ${_index}, ${_index})`
   }
@@ -68,10 +64,11 @@ scene.add(sStarObj);
 
 const w = window.innerWidth;
 const h = window.innerHeight;
-const camera = new THREE.PerspectiveCamera(80, w / h, 1, 1000);
+const camera = new THREE.PerspectiveCamera(40, w / h, 1, 1000);
 renderer.setSize(w, h);
 
 const animate = function () {
+
   requestAnimationFrame(animate);
   time += inc;
   dist += pos;
@@ -88,8 +85,6 @@ const animate = function () {
   sStarObj.position.set(sStar.pos.x, sStar.pos.y, sStar.pos.z);
 
   trailShootingStarObjArr[sStar.life].position.set(sStar.pos.x, sStar.pos.y, sStar.pos.z)
-
-  
 
   window.addEventListener("wheel", onMouseWheel);
   renderer.render(scene, camera);
