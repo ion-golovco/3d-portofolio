@@ -5,14 +5,21 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setClearColor(new THREE.Color("#050505"), 1);
 document.body.appendChild(renderer.domElement);
 const gridHelper = new THREE.GridHelper(200, 50);
-const camera = new THREE.PerspectiveCamera(30, c.w / c.h, 1, 1000);
-renderer.setSize(c.w, c.h);
+const w = window.innerWidth;
+const h = window.innerHeight;
+const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
+renderer.setSize(w, h);
+
+
+const pointLight = new THREE.PointLight(0xffffff);
+scene.add(pointLight);
+createBackgroundStars(1500);
 
 const animate = function () {
   requestAnimationFrame(animate);
   c.time += c.inc;
   scrollUpdate();
-
+  pointLight.position.set(Math.sin(c.time) * 10, Math.cos(c.time) * 10, Math.cos(c.time) * 10);
   window.addEventListener("wheel", onMouseWheel);
   renderer.render(scene, camera);
 };
