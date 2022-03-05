@@ -1,0 +1,16 @@
+Add a planet for each sphere i do
+ -programing
+ -video editing 
+ -game dev
+ -real life stuff implication
+Each planet orbits around a sun which will pe the contact page
+When clicking on a planet, or sun you will get sent to a page using react router
+the planets will have the same color as the page background
+they will have writeen on them the name or will use a react component that changes when its close to a different planet
+There will be little moons orbiting the planets for the important projects specific to the planet
+
+For mobile there will be a different page, with only react and will just send you to the pages that were the planets.
+The ui will have only basic info and will dissaper once you start scorlling
+For the planets, they can have vibrant colors and could also add shaders and other stuff
+
+the other pages will not have 3d elements for now.
