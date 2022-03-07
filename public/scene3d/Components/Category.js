@@ -12,6 +12,7 @@ class CategoryPlanet {
     this.angle = _angle;
     this.direction = _direction;
     this.moons = []
+    
   }
   init(){
       //adds moons
