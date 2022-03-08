@@ -6,4 +6,5 @@ let c = {
 }
 let entity ={
   categoryPlanet:[],
+  categoryMoon:[]
 }
