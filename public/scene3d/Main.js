@@ -20,7 +20,6 @@ const animate = function () {
   c.time += c.inc;
   scrollUpdate();
   pointLight.position.set(Math.sin(c.time) * 10, Math.cos(c.time) * 10, Math.cos(c.time) * 10);
-  window.addEventListener("wheel", onMouseWheel);
   renderer.render(scene, camera);
 };
 animate();
