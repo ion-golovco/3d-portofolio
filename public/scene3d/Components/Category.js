@@ -15,6 +15,7 @@ class CategoryPlanet {
     this.cor = _corection
     
   }
+   
   init() {
     this.dist = this.id * 10;
   }
