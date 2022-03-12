@@ -21,6 +21,7 @@ const animate = function () {
   scrollUpdate();
   pointLight.position.set(Math.sin(c.time) * 10, Math.cos(c.time) * 10, Math.cos(c.time) * 10);
   renderer.render(scene, camera);
+   
 };
 animate();
 
