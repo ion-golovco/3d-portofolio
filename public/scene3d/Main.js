@@ -10,18 +10,21 @@ const h = window.innerHeight;
 const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
 renderer.setSize(w, h);
 
-
 const pointLight = new THREE.PointLight(0xffffff);
 scene.add(pointLight);
+
 createBackgroundStars(1500);
+addCategory();
+initCategory();
 
 const animate = function () {
   requestAnimationFrame(animate);
-  c.time += c.inc;
+  c.time += c.incTime;
   scrollUpdate();
+  updateCategory()
   pointLight.position.set(Math.sin(c.time) * 10, Math.cos(c.time) * 10, Math.cos(c.time) * 10);
   renderer.render(scene, camera);
-   
+  
 };
 animate();
 

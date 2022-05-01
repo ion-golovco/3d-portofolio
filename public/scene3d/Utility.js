@@ -1,16 +1,16 @@
 let c = {
   scrollDist:10,
-  time:0,
   scrollPos:0,
-  inc:0.005,
+  
+  time:0,
+  incTime:0.005,
 }
-let entity = {
-  categoryPlanet:[],
+
+let entities = {
+  category:[],
   categoryMoon:[],
-  sun:{
-    pos: new THREE.Vector3(-50, 1, 1)
-  }
 }
+
 
 class Star {
   constructor() {

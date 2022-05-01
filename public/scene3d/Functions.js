@@ -15,8 +15,7 @@ function onMouseWheel(event) {
 
 function createBackgroundStars(n) {
   for (let i = 0; i < n; i++) {
-    c.stars.push(new Star());
-    let s = c.stars[i];
+    let s = new Star();
     const geometry = new THREE.SphereGeometry(s.size, 24, 24);
     const material = new THREE.MeshStandardMaterial({ color: s.color });
     const sphere = new THREE.Mesh(geometry, material);
@@ -24,6 +23,18 @@ function createBackgroundStars(n) {
     scene.add(sphere);
   }
 }
+function initCategory(){
+  for(let i of entities.category){
+    i.init();
+  }
+}
+function updateCategory() {
+  for(let i of entities.category){
+    i.update();
+    i.show();
+  }
+}
+
 function RN(value) {
   return (Math.random() * 2 - 1) * value;
 }
