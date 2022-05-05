@@ -22,21 +22,22 @@ class Category {
     this.dist = 0;
     this.cor = _corection;
     this.obj;
+    this.size = RN(0.4)+0.2
   }
   init() {
-    this.dist = this.id * 10;
+    this.dist = (this.id +1) * 10 +20;
     this.angle = RN(1)
     this.cor = this.angle + this.cor;
-    const geometry = new THREE.SphereGeometry(RN(0.1)+0.5, 24, 24);
-    const material = new THREE.MeshStandardMaterial({ color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}) });
+    const geometry = new THREE.SphereGeometry(this.size, 10, 5);
+    const material = new THREE.MeshToonMaterial({ color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}) });
     this.obj = new THREE.Mesh(geometry, material);
     scene.add(this.obj);
     console.log(this.obj);
   }
   update() {
-    this.angle = c.scrollDist + this.cor;
+    this.angle = c.scrollDist*(1-this.size) + this.cor;
     this.pos.x =  this.dist * Math.sin(this.angle)*0.1
-    this.pos.z =  this.dist * Math.cos(this.angle)*0.1
+    this.pos.y =  this.dist * Math.cos(this.angle)*0.1
 
 }
   show() {

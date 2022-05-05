@@ -16,7 +16,7 @@ function onMouseWheel(event) {
 function createBackgroundStars(n) {
   for (let i = 0; i < n; i++) {
     let s = new Star();
-    const geometry = new THREE.SphereGeometry(s.size, 24, 24);
+    const geometry = new THREE.SphereGeometry(s.size, 4, 4);
     const material = new THREE.MeshStandardMaterial({ color: s.color });
     const sphere = new THREE.Mesh(geometry, material);
     sphere.position.set(s.pos.x, s.pos.y, s.pos.z);
