@@ -12,18 +12,36 @@ renderer.setSize(w, h);
 
 const pointLight = new THREE.PointLight(0xffffff);
 scene.add(pointLight);
+const ambientLight = new THREE.PointLight(0xffffff);
+scene.add(ambientLight);
+
+scene.add(new THREE.AxesHelper(5))
+
+const fiveTone = new THREE.TextureLoader().load("img/fiveTone.jpg");
+fiveTone.minFilter = THREE.NearestFilter
+fiveTone.magFilter = THREE.NearestFilter
 
 createBackgroundStars(1500);
 addCategory();
 initCategory();
 
+let composer = new POSTPROCESSING.EffectComposer(renderer);
+const effectPass = new POSTPROCESSING.EffectPass(
+  camera,
+  new POSTPROCESSING.BloomEffect()
+);
+effectPass.renderToScreen = true;
+composer.addPass(effectPass);
+
 const animate = function () {
   requestAnimationFrame(animate);
+
+  composer.render();
   c.time += c.incTime;
   scrollUpdate();
   updateCategory()
   pointLight.position.set(Math.sin(c.time) * 10, Math.cos(c.time) * 10, Math.cos(c.time) * 10);
-  renderer.render(scene, camera);
+  composer.render()
   
 };
 animate();
