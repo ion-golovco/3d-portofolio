@@ -38,3 +38,18 @@ function updateCategory() {
 function RN(value) {
   return (Math.random() * 2 - 1) * value;
 }
+
+function onWindowResize() {
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize( width, height );
+  composer.setSize( width, height );
+
+}
+
+
