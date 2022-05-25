@@ -1,4 +1,4 @@
-let c = {
+export let c = {
   scrollDist:10,
   scrollPos:0,
   
@@ -6,16 +6,7 @@ let c = {
   incTime:0.005,
 }
 
-let entities = {
+export let entities = {
   category:[],
   categoryMoon:[],
-}
-
-
-class Star {
-  constructor() {
-    this.pos = new THREE.Vector3(RN(20), RN(20), RN(1));
-    this.size = RN(0.044);
-    this.color = 0xffffff;
-  }
 }

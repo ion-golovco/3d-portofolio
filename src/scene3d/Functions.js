@@ -1,19 +1,29 @@
-function scrollUpdate(){
-  window.addEventListener("wheel", onMouseWheel);
-    if(c.scrollDist<18&&c.scrollPos>0){
-        c.scrollDist += c.scrollPos;
-      }else if(c.scrollDist>-100&&c.scrollPos<0){
-        c.scrollDist += c.scrollPos;
-      }
-    c.scrollPos *= 0.9;
-    camera.position.z = c.scrollDist;
-}
+import {c, entities} from "./Utility"
+import * as THREE from 'three';
+import {Star} from "./Category"
+import { scene } from './Main';
 
-function onMouseWheel(event) {
+export function onMouseWheel(event) {
  c.scrollPos = -0.001 * event.deltaY;
 }
 
-function createBackgroundStars(n) {
+export function initCategory(){
+  for(let i of entities.category){
+    i.init();
+  }
+}
+export function updateCategory() {
+  for(let i of entities.category){
+    i.update();
+    i.show();
+  }
+}
+
+export function RN(value) {
+  return (Math.random() * 2 - 1) * value;
+}
+
+export function createBackgroundStars(n) {
   for (let i = 0; i < n; i++) {
     let s = new Star();
     const geometry = new THREE.SphereGeometry(s.size, 4, 4);
@@ -23,33 +33,3 @@ function createBackgroundStars(n) {
     scene.add(sphere);
   }
 }
-function initCategory(){
-  for(let i of entities.category){
-    i.init();
-  }
-}
-function updateCategory() {
-  for(let i of entities.category){
-    i.update();
-    i.show();
-  }
-}
-
-function RN(value) {
-  return (Math.random() * 2 - 1) * value;
-}
-
-function onWindowResize() {
-
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize( width, height );
-  composer.setSize( width, height );
-
-}
-
-
