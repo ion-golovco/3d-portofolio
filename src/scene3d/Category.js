@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import {c, entities} from "./Utility"
-import {RN} from "./Functions"
+import {randomSpherePosition, RN} from "./Functions"
 import { fiveTone, scene } from './Main';
 
 export function addCategory() {
@@ -19,10 +19,10 @@ export class Category {
     this.dist = 0;
     this.cor = _corection;
     this.obj = {};
-    this.size = 0.5 + RN(0.2);
+    this.size = 4 + RN(2);
   }
   init() {
-    this.dist = (this.id + 1) * 10 + 0;
+    this.dist = (this.id + 1) * 20 + 0;
     this.angle = RN(1);
     this.cor = this.angle + this.cor;
 
@@ -39,9 +39,9 @@ export class Category {
     
   }
   update() {
-    this.angle = (c.scrollDist) * (1 - this.size) + this.cor;
+    this.angle = (c.scrollDist) * (6 - this.size) + this.cor;
     this.pos.x = this.dist * Math.sin(this.angle*0.4)
-    this.pos.z = this.dist * Math.cos(this.angle*0.4)
+    this.pos.z = -50+(this.dist * Math.cos(this.angle*0.4))
   }
   show() {
     if (c.scrollPos !== 0) {
@@ -51,7 +51,7 @@ export class Category {
 }
 export class Star {
   constructor() {
-    this.pos = new THREE.Vector3(RN(20), RN(20), RN(15));
+    this.pos = randomSpherePosition();
     this.size = RN(0.044);
     this.color = 0xffffff;
   }

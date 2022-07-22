@@ -10,6 +10,7 @@ import {
   initCategory,
   onMouseWheel,
   createBackgroundStars,
+  cameraMovement,
 } from "./Functions";
 import { addCategory } from "./Category";
 import { c } from "./Utility";
@@ -23,11 +24,7 @@ const animate = function () {
   c.time += c.incTime;
   scrollUpdate();
   updateCategory();
-  pointLight.position.set(
-    Math.sin(c.time) * 10,
-    Math.cos(c.time) * 10,
-    Math.cos(c.time) * 10
-  );
+  pointLight.position.set(0,0,0);
   composer.render();
 };
 
@@ -39,10 +36,11 @@ function initial() {
   renderer.setClearColor(new THREE.Color("#050505"), 1);
   document.body.appendChild(renderer.domElement);
   const gridHelper = new THREE.GridHelper(200, 50);
-  scene.add(gridHelper);
+  //scene.add(gridHelper);
   const w = window.innerWidth;
   const h = window.innerHeight;
   camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
+  
   renderer.setSize(w, h);
 
   pointLight = new THREE.PointLight(0xffffff);
@@ -60,17 +58,7 @@ function initial() {
 
   composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  composer.addPass(
-    new EffectPass(
-      camera,
-      new BloomEffect(
-        new THREE.Vector2(window.innerWidth, window.innerHeight),
-        2,
-        1,
-        5
-      )
-    )
-  );
+  composer.addPass(new EffectPass(camera, new BloomEffect()));
   window.addEventListener("resize", onWindowResize);
 }
 animate();
@@ -82,13 +70,8 @@ function scrollUpdate() {
   } else if (c.scrollDist > -100 && c.scrollPos < 0) {
     c.scrollDist += c.scrollPos;
   }
-  c.scrollPos *= 0.9;
-  camera.position.z = c.scrollDist;
-
-  let x = camera.position.z;
-
-  camera.rotation.x = Math.sin(x / 4) / 12;
-  camera.rotation.y = Math.cos(x / 4) / 12;
+  c.scrollPos *= 0.93;
+  cameraMovement();
 }
 
 function onWindowResize() {

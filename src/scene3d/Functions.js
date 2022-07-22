@@ -1,7 +1,15 @@
 import {c, entities} from "./Utility"
 import * as THREE from 'three';
 import {Star} from "./Category"
-import { scene } from './Main';
+import { scene, camera } from './Main';
+import { Vector3 } from "three";
+
+export function cameraMovement(){
+  camera.position.z = c.scrollDist;
+  let x = camera.position.z;
+  camera.rotation.x = Math.sin(x / 4) / 12;
+  camera.rotation.y = Math.cos(x / 4) / 12;
+}
 
 export function onMouseWheel(event) {
  c.scrollPos = -0.001 * event.deltaY;
@@ -21,6 +29,13 @@ export function updateCategory() {
 
 export function RN(value) {
   return (Math.random() * 2 - 1) * value;
+}
+export function randomSpherePosition(){
+  let pos = new THREE.Vector3()
+  pos.x =  15+ RN(50)
+  pos.y =   Math.sin(RN(2))
+  pos.z = RN(50)
+  return pos
 }
 
 export function createBackgroundStars(n) {
